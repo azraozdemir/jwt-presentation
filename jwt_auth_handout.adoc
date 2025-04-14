@@ -1,0 +1,80 @@
+
+= JWT & Authentifizierung – Überblick & Snippets
+:author: Dein Name
+:revdate: 2025-04-14
+:toc:
+:icons: font
+
+== Was ist JWT?
+
+JWT (JSON Web Token) ist ein offener Standard (RFC 7519) zur sicheren Übertragung von Informationen zwischen Parteien als JSON-Objekt.
+
+Ein Token besteht aus drei Teilen:
+
+[source]
+----
+<Header>.<Payload>.<Signature>
+----
+
+Beispiel:
+
+[source]
+----
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJ1c2VySWQiOjEyMywiaWF0IjoxNjg0NzI1NTYzfQ.
+dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
+----
+
+== Ablauf: Auth mit JWT
+
+1. User loggt sich mit Benutzerdaten ein
+2. Server generiert JWT und sendet es an den Client
+3. Client speichert Token (z. B. LocalStorage oder HttpOnly-Cookie)
+4. Bei API-Anfragen sendet der Client das Token mit
+5. Server prüft das Token und erlaubt ggf. Zugriff
+
+== Vorteile
+
+- ✅ Stateless (kein Session-Storage am Server)
+- ✅ Leichtgewichtig (Base64-kodiert)
+- ✅ Gut für verteilte Systeme / Microservices
+
+== Nachteile
+
+- ❌ Kein sofortiges Invalidieren möglich (z. B. Logout)
+- ❌ Gefahr bei XSS (Token-Diebstahl)
+- ❌ Tokengröße größer als einfache Session-ID
+
+== Code-Snippets (Node.js + Express)
+
+JWT erstellen:
+
+[source,js]
+----
+const jwt = require("jsonwebtoken");
+
+const token = jwt.sign({ userId: 123 }, "secretKey", { expiresIn: "1h" });
+console.log(token);
+----
+
+JWT prüfen (Middleware):
+
+[source,js]
+----
+function verifyToken(req, res, next) {
+  const token = req.headers["authorization"]?.split(" ")[1];
+  if (!token) return res.status(401).send("No token provided");
+
+  jwt.verify(token, "secretKey", (err, decoded) => {
+    if (err) return res.status(403).send("Invalid token");
+    req.userId = decoded.userId;
+    next();
+  });
+}
+----
+
+== Sicherheitshinweise
+
+- Verwende HTTPS, sonst können Tokens abgefangen werden
+- HttpOnly-Cookies bieten besseren Schutz als LocalStorage
+- Nutze kurze Ablaufzeiten + Refresh Tokens bei längeren Sessions

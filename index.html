@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JWT & Auth</title>
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/black.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>JWT & Auth</h1>
+          <p>Einführung ins Thema</p>
+        </section>
+        <section>
+          <h2>Was ist JWT?</h2>
+          <pre><code data-trim data-noescape>
+Header.Payload.Signature
+          </code></pre>
+        </section>
+        <section>
+          <h2>Login Flow</h2>
+          <ul>
+            <li>User sendet Login-Daten</li>
+            <li>Server gibt JWT zurück</li>
+            <li>Client speichert Token</li>
+            <li>Token wird bei jeder Anfrage mitgesendet</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Vorteile / Nachteile</h2>
+          <p><strong>✅ Vorteile:</strong> Stateless, kompakt, API-freundlich</p>
+          <p><strong>❌ Nachteile:</strong> Kein Logout, Sicherheitsrisiken</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize();
+    </script>
+  </body>
+</html>

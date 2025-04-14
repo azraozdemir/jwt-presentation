@@ -1,0 +1,37 @@
+= JWT & Auth
+:author: Almina Silnovic, Azra Oezdemir
+:revdate: 2025-04-14
+:icons: font
+
+This repository contains materials for a short technical talk and exercise session on *JSON Web Tokens (JWT)* and authentication.
+
+== 📊 Contents
+
+- `index.html` – Reveal.js presentation
+- `jwt_auth_handout.adoc` – 1-2 page summary with code snippets
+- `live-coding/` – Folder for live coding example (Express.js)
+- `exercise/` – Folder with exercise and solution
+
+== 🧠 Topics Covered
+
+- What is JWT?
+- How JWT-based authentication works
+- Pros and cons of using JWT
+- Example implementation in Node.js (Express)
+- Security tips and best practices
+
+== 🚀 How to Use
+
+1. Clone the repo
+
+[source,bash]
+----
+git clone https://github.com/alminasilnovic/jwt-presentation.git
+----
+
+2. Open `index.html` in your browser to view the presentation.
+
+3. Use the handout for review or print-out.
+
+4. Extend or edit the live coding example or exercise as needed.
+
