@@ -8,8 +8,6 @@
 == Was ist JWT?
 JWT steht für JSON Web Token. Es ist ein Token, der strukturierte Informationen (sogenannte Claims) enthält und oft für Authentifizierung und Autorisierung verwendet wird.
 
-Ein JWT ist eine digitale Bestätigung, die der Server nach einer erfolgreichen Anmeldung erstellt und die der Client dann bei zukünftigen Anfragen mit sich trägt.
-
 === Authentifizierung vs Autorisierung
 
 Authentifizierung: **„Wer bist du?“** – Der Prozess, bei dem ein Benutzer nachweist, wer er ist. Z.B. durch Eingabe von Benutzernamen & Passwort
@@ -20,15 +18,6 @@ Autorisierung: **„Was darfst du tun?“** – Der Prozess, bei dem geprüft wi
 [source]
 ----
 <Header>.<Payload>.<Signature>
-----
-
-Beispiel:
-
-[source]
-----
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-eyJ1c2VySWQiOjEyMywiaWF0IjoxNjg0NzI1NTYzfQ.
-dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk
 ----
 
 Ein JWT wird nach erfolgreicher Authentifizierung erstellt
