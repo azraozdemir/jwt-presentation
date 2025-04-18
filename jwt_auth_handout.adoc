@@ -15,13 +15,45 @@ Authentifizierung: **„Wer bist du?“** – Der Prozess, bei dem ein Benutzer 
 Autorisierung: **„Was darfst du tun?“** – Der Prozess, bei dem geprüft wird, auf welche Ressourcen der authentifizierte Benutzer zugreifen darf. Z.B. auf welches Bankkonto darfst du zugreifen?
 
 === Aufbau
+Der Token besteht aus drei Base64Url-codierten Teilen, getrennt durch Punkte.
+
 [source]
 ----
 <Header>.<Payload>.<Signature>
 ----
 
-Ein JWT wird nach erfolgreicher Authentifizierung erstellt
-und dient dann zur Autorisierung bei jeder weiteren Anfrage.
+**Header:**
+Gibt den Typ des Tokens und den verwendeten Algorithmus zum Verschlüsseln (Z.B. HS256) an.
+[source,json]
+----
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+----
+
+**Payload:**
+Enthält die Claims, also die eigentlichen Daten wie Benutzer-ID oder Rollen, die übertragen werden sollen.
+[source,json]
+----
+{
+  "sub": "1234567890",
+  "name": "Max Mustermann",
+  "iat": 1713436800,
+  "exp": 1713440400,
+  "admin": true
+}
+----
+
+**Signature:**
+Dient zur Überprüfung der Echtheit des Tokens, indem sie aus Header, Payload und einem geheimen Schlüssel erzeugt wird.
+[source]
+----
+HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+  geheim_schlüssel
+)
+----
 
 == Ablauf: Auth mit JWT
 
@@ -32,39 +64,15 @@ und dient dann zur Autorisierung bei jeder weiteren Anfrage.
 5. Server prüft Token: Der Server prüft das JWT, indem er...
     - die Signatur validiert **(wurden die Daten verändert?)**,
     - das Ablaufdatum prüft **(ist der Token noch gültig und nicht abgelaufen?)**
-    - und sicherstellt, dass der Benutzer die nötigen Berechtigungen hat.
 
 Wenn alles passt, gewährt der Server Zugriff.
 
-== Vorteile
+== Vorteile und Nachteile
+Alternativen nennen (Sessions), wann sollte man was verwenden?...
 
-== Nachteile
-
-
-== Code-Snippets (Node.js + Express)
+== weitere Code-Snippets
 
 JWT erstellen:
 
-[source,js]
-----
-const jwt = require("jsonwebtoken");
-
-const token = jwt.sign({ userId: 123 }, "secretKey", { expiresIn: "1h" });
-console.log(token);
-----
-
-JWT prüfen (Middleware):
-
-[source,js]
-----
-function verifyToken(req, res, next) {
-  const token = req.headers["authorization"]?.split(" ")[1];
-  if (!token) return res.status(401).send("No token provided");
-
-  jwt.verify(token, "secretKey", (err, decoded) => {
-    if (err) return res.status(403).send("Invalid token");
-    req.userId = decoded.userId;
-    next();
-  });
-}
-----
+weiteres
+...

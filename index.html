@@ -1,51 +1,103 @@
-
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <title>JWT & Auth</title>
-    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css" />
-    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/black.css" />
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/black.css"/>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
         <section>
-          <h1>JWT & Auth</h1>
-          <p>Einführung ins Thema</p>
+            <h1>JWT</h1>
         </section>
         <section>
-          <h2>Was ist JWT?</h2>
-          <pre><code data-trim data-noescape>
+            <h2>Was ist JWT?</h2>
+            <p>Token, der strukturierte Informationen (sogenannte Claims) enthält und oft für Authentifizierung und
+                Autorisierung verwendet wird.</p>
+        </section>
+        <section>
+            <h2>Authentifizierung</h2>
+            <p>"Wer bist du?"</p>
+            <p>Prüfung ob richtiger Nutzer</p>
+            <p>Beispiel: Login Verfahren</p>
+        </section>
+        <section>
+            <h2>Autorisierung</h2>
+            <p>"Was darfst du?"</p>
+            <p>Prüfung nach der Authentifizierung, welche Ressourcen darf man zugreifen/ändern?</p>
+            <p>Server erlaubt/verbietet Nutzern, auf eine Ressource zuzugreifen</p>
+            <p>Beispiel: Zugriff auf Bankkonto</p>
+        </section>
+        <section>
+            <p>Aufbau</p>
+            <pre><code data-trim data-noescape>
 Header.Payload.Signature
           </code></pre>
         </section>
         <section>
-          <h2>Login Flow</h2>
-          <ul>
-            <li>User sendet Login-Daten</li>
-            <li>Server gibt JWT zurück</li>
-            <li>Client speichert Token</li>
-            <li>Token wird bei jeder Anfrage mitgesendet</li>
-          </ul>
+            <p>Header</p>
+            <pre><code data-trim data-noescape>
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+          </code></pre>
         </section>
-          <section>
-              <img src="img/server_login.png" alt="server_login" />
-          </section>
-          <section>
-              <img src="img/jwt_login.png" alt="jwt_login" />
-          </section>
         <section>
-          <h2>Vorteile / Nachteile</h2>
-          <p><strong>✅ Vorteile:</strong> Stateless, kompakt, API-freundlich</p>
-          <p><strong>❌ Nachteile:</strong> Kein Logout, Sicherheitsrisiken</p>
+            <p>Payload</p>
+            <pre><code data-trim data-noescape>
+{
+  "sub": "1234567890",
+  "name": "Max Mustermann",
+  "iat": 1713436800,
+  "exp": 1713440400,
+  "admin": true
+}
+          </code></pre>
         </section>
-      </div>
+        <section>
+            <p>Signature</p>
+            <pre><code data-trim data-noescape>
+HMACSHA256(
+  base64UrlEncode(header) + "." + base64UrlEncode(payload),
+  geheim_schlüssel
+)
+          </code></pre>
+        </section>
+        <section>
+            <h2>Ablauf</h2>
+            <ul>
+                <li>User schickt Request mit Login-Daten</li>
+                <li>Server gibt JWT zurück</li>
+                <li>Client speichert Token</li>
+                <li>Token wird bei jedem nächsten Request mitgeschickt</li>
+                <li>Server prüft Token (Signatur)</li>
+                <li>Server gewährt Client Zugriff</li>
+            </ul>
+        </section>
+        <section>
+            <img src="img/jwt_login.png" alt="jwt_login"/>
+        </section>
+        <section>
+            <h2>Vorteile / Nachteile</h2>
+            <p><strong>✅ Vorteile:</strong> ...</p>
+            <p><strong>❌ Nachteile:</strong> ...</p>
+        </section>
+        <section>
+            <h2>Alternative</h2>
+            <p>...</p>
+        </section>
+        <section>
+            <p>Bild mit Ablauf</p>
+        </section>
     </div>
+</div>
 
-    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
-    <script>
-      Reveal.initialize();
-    </script>
-  </body>
+<script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+<script>
+    Reveal.initialize();
+</script>
+</body>
 </html>
