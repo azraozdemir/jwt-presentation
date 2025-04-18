@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "target": "ESNext",                          // Set the JavaScript target version (use ES6 or ES2020 for Node.js)
+    "module": "CommonJS",                        // Use CommonJS module system for Node.js
+    "strict": true,                              // Enable strict type checking options
+    "esModuleInterop": true,                     // Allows default imports from modules with no default export
+    "skipLibCheck": true,                        // Skip type checking of declaration files for faster compilation
+    "forceConsistentCasingInFileNames": true,    // Ensure consistent file casing across the project
+    "outDir": "./dist",                          // Output directory for the compiled JavaScript files
+    "rootDir": "./src",                          // Root directory for the TypeScript source files
+    "moduleResolution": "node",                  // Use Node.js module resolution strategy
+    "resolveJsonModule": true,                   // Allows importing JSON modules
+    "noEmitOnError": true                        // Do not emit output files if there are TypeScript errors
+  },
+  "include": [
+    "src",
+    "types"
+  ],
+  "exclude": [
+    "node_modules"                               // Exclude the 'node_modules' directory from compilation
+  ]
+}

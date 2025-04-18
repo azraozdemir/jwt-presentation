@@ -1,0 +1,88 @@
+= JWT Authentication: The Secret Unicorn Clubhouse 🦄
+In this assignment, you'll use JWT to secure a secret **Unicorn Clubhouse**.
+Only members with a **magical token** are allowed entry.
+== Setup
+Install the required packages:
+[source, bash]
+----
+npm init -y
+npm install express jsonwebtoken
+npm install @types/express @types/jsonwebtoken typescript ts-node
+----
+
+Create a `server.ts` file and follow the instructions below.
+
+== Task 1: Login and Token Generation
+
+Create a POST route `/login` that accepts a username and password in the request body.
+If the login is successful, generate a JWT and return it.
+
+*Login credentials for testing:*
+- Username: `luna`
+- Password: `glitter123`
+
+Tip: Use `jwt.sign(payload, secret, options)` to create the token.
+
+Sample request:
+POST /login
+[source, json]
+----
+{
+  "username": "luna",
+  "password": "glitter123"
+}
+----
+
+Sample response:
+[source, json]
+----
+{
+  "token": "<YOUR_JWT_HERE>"
+}
+----
+
+== Task 2: Protected Unicorn World
+
+Create a GET route `/unicorn-world`.
+This route is **protected** and can only be accessed if a valid JWT is sent in the `Authorization` header.
+
+*Header format:*
+`Authorization: Bearer <YOUR_JWT_HERE>`
+
+Tip: Use `jwt.verify(token, secret)` to validate the token.
+
+Sample request: GET /unicorn-world
+[source, bash]
+----
+Authorization: Bearer <YOUR_TOKEN_HERE>
+----
+
+Sample response:
+[source, json]
+----
+{
+  "message": "Welcome to the Unicorn Clubhouse, Luna! 🦄",
+  "secrets": [
+    "Unicorns fly on rainbows",
+    "Their favorite snack is Glitter Muesli",
+    "They can talk to the stars"
+  ]
+}
+----
+
+If no token or an invalid token is sent, respond with a 403 and the message `"Access denied for non-members!"`.
+
+== Task 3: Token Expiry
+
+Ensure the JWT expires after **1 hour**.
+Use the `expiresIn` option when creating the token.
+
+Tip: When the token expires, `jwt.verify` will throw an error. Handle this error with a clear message.
+
+Sample response for expired token:
+[source, json]
+----
+{
+  "message": "Invalid or expired token!"
+}
+----

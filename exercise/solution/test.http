@@ -1,0 +1,17 @@
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username": "luna",
+  "password": "glitter123"
+}
+
+###
+
+GET http://localhost:3000/unicorn-world
+Authorization: Bearer YOUR_TOKEN
+
+###
+
+GET http://localhost:3000/unicorn-world
+Authorization: Bearer invalid.token.here
