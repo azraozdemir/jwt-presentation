@@ -68,11 +68,42 @@ HMACSHA256(
 Wenn alles passt, gewährt der Server Zugriff.
 
 == Vorteile und Nachteile
-Alternativen nennen (Sessions), wann sollte man was verwenden?...
 
-== weitere Code-Snippets
+=== ✅ Vorteile von JWT
+* Zustandslos (stateless) – keine Session-Verwaltung auf dem Server nötig
+* Plattformunabhängig – funktioniert überall, auch mobil
+* Manipulationssicher – durch digitale Signatur
+* Schneller – kein Nachfragen beim Server nötig
+* Einfach zu skalieren – ideal bei verteilten Systemen oder Microservices
 
-JWT erstellen:
+=== ❌ Nachteile von JWT
+* Kein sofortiger Logout – Token bleibt bis Ablauf gültig
+* Token kann gestohlen und missbraucht werden
+* Token-Größe kann Netzwerk belasten
+* Keine einfache Erneuerung – Refresh-Token-Logik muss zusätzlich umgesetzt werden
 
-weiteres
-...
+== Wann sollte man JWT verwenden?
+
+* Bei **verteilten Systemen** (z. B. Microservices), wo keine zentrale Session-Verwaltung möglich ist
+* Für **mobile Apps** oder **Single Page Applications (SPAs)**, bei denen serverseitige Sessions unpraktisch sind
+* Wenn man **eine schnelle, zustandslose Authentifizierung** benötigt
+
+== Alternativen zu JWT
+
+=== ✅ Session-Based Authentication
+* Funktioniert mit einer Session-ID, die im Cookie gespeichert wird
+* Server verwaltet den Benutzerzustand (z. B. in einem Session-Store)
+
+=== Vorteile:
+* Session kann sofort beendet werden (Logout)
+* Gut für klassische Webanwendungen
+* Einfach umzusetzen
+
+=== Nachteile:
+* Skaliert schlecht – funktioniert schlecht bei vielen Servern ohne gemeinsamen Speicher
+* Server muss sich alles merken (zustandsbehaftet)
+
+== Zusammenfassung
+
+* JWT ist ideal für moderne, verteilte Webanwendungen
+* Session-Auth ist ideal für einfache, klassische Webseiten mit wenigen Server*
