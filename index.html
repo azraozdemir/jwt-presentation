@@ -82,16 +82,62 @@ HMACSHA256(
         </section>
         <section>
             <h2>Vorteile / Nachteile</h2>
-            <p><strong>✅ Vorteile:</strong> ...</p>
-            <p><strong>❌ Nachteile:</strong> ...</p>
+
+            <h3>✅ Vorteile</h3>
+            <ul>
+                <li>Zustandslos (Stateless)</li>
+                <li>Client-seitige Speicherung</li>
+                <li>Plattformübergreifend & schnell</li>
+                <li>Manipulationssicher</li>
+            </ul>
+
+            <h3>❌ Nachteile</h3>
+            <ul>
+                <li>Kein sofortiger Logout möglich</li>
+                <li>Token kann gestohlen werden</li>
+                <li>Keine einfache Erneuerung</li>
+                <li>Token ist groß</li>
+            </ul>
         </section>
+
         <section>
             <h2>Alternative</h2>
-            <p>...</p>
+            <p>Session-Authentication </p>
+            <p></p>
         </section>
         <section>
-            <p>Bild mit Ablauf</p>
+            <h2>Ablauf</h2>
+            <ul>
+                <li>Benutzer gibt Login-Daten ein</li>
+                <li>Server empfängt und prüft Daten</li>
+                <li>Login erfolgreich → Server erstellt Session</li>
+                <li>Session-ID wird generiert</li>
+                <li>Session-ID im Cookie gespeichert (Browser)</li>
+                <li>Browser sendet Cookie bei jeder Anfrage mit</li>
+                <li>Server erkennt Benutzer über Session-ID</li>
+                <li>Logout → Server löscht Session</li>
+            </ul>
         </section>
+        <section>
+            <img src="img/session_aufbau.png" alt="session_aufbau"/>
+        </section>
+        <section>
+            <h2>Vorteile / Nachteile</h2>
+
+            <h3>✅ Vorteile</h3>
+            <ul>
+                <li>Der Server kann eine Session sofort löschen</li>
+                <li>Einfach umsetzbar</li>
+                <li>Perfekt für klassische Websiten</li>
+            </ul>
+
+            <h3>❌ Nachteile</h3>
+            <ul>
+                <li>Funktioniert schlecht bei vielen Servern</li>
+                <li>Muss sich alles merken</li>
+            </ul>
+        </section>
+
     </div>
 </div>
 
